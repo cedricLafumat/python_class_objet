@@ -4,6 +4,7 @@ class Wizard:
     def __init__(self,name):
         self.name = name
         self.max_health = 12
+        self.current_health = self.max_health
 
     def attack(self):
         self.magic_dice = 12
@@ -29,16 +30,14 @@ class Wizard:
         print("\nDéfense avec l'arme '{}' avec '{}' points".format(weapon,defend_roll))
         if attack_points > defend_roll:
             loss_health = attack_points - defend_roll
-            print("\nPerte de '{}' points de vie".format(loss_health))
+            self.current_health -= loss_health
+            print("\nLa Défense à échouchée\nPerte de '{}' points de vie".format(loss_health))
         else:
-            print("\nDéfense réussi")
+            print("\nLa Défense à réussie\nPerte de '{}' points de vie".format(loss_health))
+        return self.current_health
 
     def __repr__(self):
         return "{} the {}".format(self.name, self.__class__.__name__.lower())
 
-wizard = Wizard("Gandalf")
-print(wizard)
-# attack=wizard.attack()
-# weapon,points=attack
-# print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon, points))
-# defend=wizard.defend(weapon,points)
+# wizard = Wizard("Gandalf")
+# print(wizard)
