@@ -53,11 +53,21 @@ class Archer(Characters):
         self.name = name
         self.current_health = self.max_health
 
+    def attack(self):
+        attack = super().attack()
+        weapon,points=attack
+        print(points)
+        if weapon in ["sword","magic"]:
+            points += 1
+            print(points)
+        return [weapon,points]
+
 
 class Warrior(Characters):
     magic_dice = 8
     sword_dice = 12
     bow_dice = 10
+    max_health = 16
 
     def __init__(self, name):
         self.name = name
