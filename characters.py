@@ -43,6 +43,15 @@ class Wizard(Characters):
         self.name = name
         self.current_health = self.max_health
 
+    def attack(self):
+        attack = super().attack()
+        weapon, points = attack
+        print("\nLancé 1 : {}".format(attack))
+        throw2 = ["magic", random.randint(1, self.magic_dice)]
+        print("Lancé 2 : {}".format(throw2))
+        if throw2[1] >= points:
+            return throw2
+        return attack
 
 class Archer(Characters):
     magic_dice = 10

@@ -7,9 +7,9 @@ print(wizard)
 print(archer)
 print(warrior)
 
-while (warrior.current_health > 0) and (wizard.current_health > 0) and (warrior.current_health > 0):
-    print(archer)
-    attack = archer.attack()
+while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.current_health > 0):
+    print(wizard)
+    attack = wizard.attack()
     weapon,points=attack
     print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon, points))
     attack_choice = input("Choisissez quel classe de personnage vous voulez attaquer : ").lower()
