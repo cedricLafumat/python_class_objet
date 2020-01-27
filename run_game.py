@@ -51,8 +51,11 @@ def main():
     archer = characters.Archer("Legolas")
     warrior = characters.Warrior("Aragorn")
     print(wizard)
+    print("Taille : {}cm / Poids : {}kg\n".format(wizard.height,wizard.weight))
     print(archer)
+    print("Taille : {}cm / Poids : {}kg\n".format(archer.height,archer.weight))
     print(warrior)
+    print("Taille : {}cm / Poids : {}kg\n".format(warrior.height,warrior.weight))
 
     while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.current_health > 0):
         show_health(wizard, archer, warrior)

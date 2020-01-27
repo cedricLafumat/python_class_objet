@@ -3,6 +3,28 @@ import random
 class Characters:
     max_health = 12
 
+    def __init__(self,name):
+        self.name = name
+        self.current_health = self.max_health
+        self._height=random.randint(170,190)
+        self._weight=random.randint(70,90)
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, value):
+        self._height = value
+
+    @property
+    def weight(self):
+        return self._weight
+
+    @weight.setter
+    def weight(self, value):
+        self._weight = value
+
     def attack(self):
         dice = [
             ["magic",random.randint(1,self.magic_dice)],
@@ -39,10 +61,6 @@ class Wizard(Characters):
     sword_dice = 8
     bow_dice = 10
 
-    def __init__(self,name):
-        self.name = name
-        self.current_health = self.max_health
-
     def attack(self):
         attack = super().attack()
         weapon, points = attack
@@ -57,10 +75,6 @@ class Archer(Characters):
     magic_dice = 10
     sword_dice = 8
     bow_dice = 12
-
-    def __init__(self, name):
-        self.name = name
-        self.current_health = self.max_health
 
     def attack(self):
         attack = super().attack()
@@ -77,9 +91,3 @@ class Warrior(Characters):
     sword_dice = 12
     bow_dice = 10
     max_health = 16
-
-    def __init__(self, name):
-        self.name = name
-        self.current_health = self.max_health
-
-print(__name__)
