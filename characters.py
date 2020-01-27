@@ -81,3 +81,5 @@ class Warrior(Characters):
     def __init__(self, name):
         self.name = name
         self.current_health = self.max_health
+
+print(__name__)

@@ -1,28 +1,13 @@
 import characters
 
-wizard = characters.Wizard("Gandalf")
-archer = characters.Archer("Legolas")
-warrior = characters.Warrior("Aragorn")
-print(wizard)
-print(archer)
-print(warrior)
-
-while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.current_health > 0):
+def selection_char():
     player_choice = input("\nChoisissez une classe de personnage avec laquelle vous voulez jouer "
                           "(M)agicien "
                           "(A)rcher "
                           "(G)uerrier : ").upper()
-    if player_choice == "M":
-        print(wizard)
-        attack = wizard.attack()
-    elif player_choice ==  "A":
-        print(archer)
-        attack = archer.attack()
-    elif player_choice == "G":
-        print(warrior)
-        attack = warrior.attack()
-    weapon,points=attack
-    print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon, points))
+    return player_choice
+
+def selection_target(wizard,archer,warrior):
     print("\nPoints de vie actuel:\n"
           "Magicien : {} "
           "Archer : {} "
@@ -31,39 +16,56 @@ while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.c
                           "(M)agicien "
                           "(A)rcher "
                           "(G)uerrier : ").upper()
-    if attack_choice == "M":
+    return attack_choice
+
+def attack_management(choice_char, wizard, archer, warrior):
+    if choice_char == "M":
+        print(wizard)
+        attack = wizard.attack()
+    elif choice_char == "A":
+        print(archer)
+        attack = archer.attack()
+    else:
+        print(warrior)
+        attack = warrior.attack()
+    weapon,points=attack
+    print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon,points))
+    return attack
+
+def defence_management(target_selected,attack,wizard,archer,warrior):
+    weapon,points = attack
+    if target_selected == "M":
         defend = wizard.defend(weapon, points)
-    elif attack_choice == "G":
-        defend = warrior.defend(weapon, points)
-    elif attack_choice == "A":
+    elif target_selected == "A":
         defend = archer.defend(weapon, points)
+    else:
+        defend = warrior.defend(weapon, points)
     print("\nPoints de vie restant : {}".format(defend))
 
-    # print(archer)
-    # attack = archer.attack()
-    # weapon,points=attack
-    # print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon, points))
-    # attack_choice = input("Choisissez quel classe de personnage vous voulez attaquer : ").lower()
-    # if attack_choice == "wizard":
-    #     defend = wizard.defend(weapon, points)
-    # elif attack_choice == "warrior":
-    #     defend = warrior.defend(weapon, points)
-    # elif attack_choice == "archer":
-    #     defend = archer.defend(weapon, points)
-    # print("\nPoints de vie restant : {}".format(defend))
-    #
-    # print(warrior)
-    # attack = warrior.attack()
-    # weapon,points=attack
-    # print("\nAttaque avec l'arme '{}' et fait '{}' points de dégats".format(weapon, points))
-    # attack_choice = input("Choisissez quel classe de personnage vous voulez attaquer : ").lower()
-    # if attack_choice == "wizard":
-    #     defend = wizard.defend(weapon, points)
-    # elif attack_choice == "warrior":
-    #     defend = warrior.defend(weapon, points)
-    # elif attack_choice == "archer":
-    #     defend = archer.defend(weapon, points)
-    # print("\nPoints de vie restant : {}".format(defend))
-    #
-    #
-    #
+
+
+def main():
+    wizard = characters.Wizard("Gandalf")
+    archer = characters.Archer("Legolas")
+    warrior = characters.Warrior("Aragorn")
+    print(wizard)
+    print(archer)
+    print(warrior)
+
+    while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.current_health > 0):
+
+        choice_char = selection_char()
+        while choice_char not in ["M","A","G"]:
+            print("Choix non compris dans les possibilités")
+            choice_char = selection_char()
+
+        target_selected = selection_target(wizard,archer,warrior)
+        while target_selected not in ["M","A","G"]:
+            print("Choix non compris dans les possibilités")
+            target_selected = selection_target()
+
+        attack = attack_management(choice_char, wizard, archer, warrior)
+        defence_management(target_selected,attack,wizard,archer,warrior)
+
+if __name__ == '__main__':
+    main()
