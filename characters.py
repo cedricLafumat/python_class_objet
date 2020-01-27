@@ -67,9 +67,17 @@ class Wizard(Characters):
         print("\nLancé 1 : {}".format(attack))
         throw2 = ["magic", random.randint(1, self.magic_dice)]
         print("Lancé 2 : {}".format(throw2))
-        if throw2[1] >= points:
+        if throw2[1] > points:
             return throw2
-        return attack
+        if weapon == "sword":
+            bonus = ((self.height+self.weight)//40)
+            points += bonus
+            print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon,bonus))
+        elif weapon == "bow":
+            bonus = ((self.height-170)%3)
+            points += bonus
+            print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
+        return [weapon,points]
 
 class Archer(Characters):
     magic_dice = 10
@@ -83,6 +91,14 @@ class Archer(Characters):
         if weapon in ["sword","magic"]:
             points += 1
             print("Choix d'arme épée ou magie : bonus de dégats +1")
+            if weapon == "sword":
+                bonus = self.height//40
+                points += bonus
+                print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
+            elif weapon == "magic":
+                bonus = self.weight//20
+                points += bonus
+                print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
         return [weapon,points]
 
 
@@ -91,3 +107,17 @@ class Warrior(Characters):
     sword_dice = 12
     bow_dice = 10
     max_health = 16
+
+    def attack(self):
+        attack = super().attack()
+        weapon,points=attack
+        print("Choix : {}".format(attack))
+        if weapon == "magic":
+            bonus = self.weight//30
+            points += bonus
+            print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
+        elif weapon == "bow":
+            bonus = ((self.height-170)%3)
+            points += bonus
+            print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
+        return [weapon,points]
