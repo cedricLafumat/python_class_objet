@@ -1,15 +1,9 @@
 import random
 
-class Wizard:
-    def __init__(self,name):
-        self.name = name
-        self.max_health = 12
-        self.current_health = self.max_health
+class Characters:
+    max_health = 12
 
     def attack(self):
-        self.magic_dice = 12
-        self.sword_dice = 8
-        self.bow_dice = 10
         dice = [
             ["magic",random.randint(1,self.magic_dice)],
             ["sword",random.randint(1,self.sword_dice)],
@@ -31,7 +25,7 @@ class Wizard:
         if attack_points > defend_roll:
             loss_health = attack_points - defend_roll
             self.current_health -= loss_health
-            print("\nLa Défense à échouchée\nPerte de '{}' points de vie".format(loss_health))
+            print("\nLa Défense à échouée\nPerte de '{}' points de vie".format(loss_health))
         else:
             print("\nLa Défense à réussie\nPerte de '{}' points de vie".format(loss_health))
         return self.current_health
@@ -39,5 +33,32 @@ class Wizard:
     def __repr__(self):
         return "{} the {}".format(self.name, self.__class__.__name__.lower())
 
-# wizard = Wizard("Gandalf")
-# print(wizard)
+
+class Wizard(Characters):
+    magic_dice = 12
+    sword_dice = 8
+    bow_dice = 10
+
+    def __init__(self,name):
+        self.name = name
+        self.current_health = self.max_health
+
+
+class Archer(Characters):
+    magic_dice = 10
+    sword_dice = 8
+    bow_dice = 12
+
+    def __init__(self, name):
+        self.name = name
+        self.current_health = self.max_health
+
+
+class Warrior(Characters):
+    magic_dice = 8
+    sword_dice = 12
+    bow_dice = 10
+
+    def __init__(self, name):
+        self.name = name
+        self.current_health = self.max_health
