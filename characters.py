@@ -65,10 +65,10 @@ class Archer(Characters):
     def attack(self):
         attack = super().attack()
         weapon,points=attack
-        print(points)
+        print("Choix : {}".format(attack))
         if weapon in ["sword","magic"]:
             points += 1
-            print(points)
+            print("Choix d'arme épée ou magie : bonus de dégats +1")
         return [weapon,points]
 
 
