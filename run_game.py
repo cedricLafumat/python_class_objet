@@ -7,16 +7,18 @@ def selection_char():
                           "(G)uerrier : ").upper()
     return player_choice
 
-def selection_target(wizard,archer,warrior):
-    print("\nPoints de vie actuel:\n"
-          "Magicien : {} "
-          "Archer : {} "
-          "Guerrier : {}".format(wizard.current_health, archer.current_health, warrior.current_health))
+def selection_target():
     attack_choice = input("Choisissez la classe de personnage que vous voulez attaquer "
                           "(M)agicien "
                           "(A)rcher "
                           "(G)uerrier : ").upper()
     return attack_choice
+
+def show_health(wizard,archer,warrior):
+    print("\nPoints de vie actuel:\n"
+          "Magicien : {} "
+          "Archer : {} "
+          "Guerrier : {}".format(wizard.current_health, archer.current_health, warrior.current_health))
 
 def attack_management(choice_char, wizard, archer, warrior):
     if choice_char == "M":
@@ -53,13 +55,13 @@ def main():
     print(warrior)
 
     while (warrior.current_health > 0) and (wizard.current_health > 0) and (archer.current_health > 0):
-
+        show_health(wizard, archer, warrior)
         choice_char = selection_char()
         while choice_char not in ["M","A","G"]:
             print("Choix non compris dans les possibilités")
             choice_char = selection_char()
-
-        target_selected = selection_target(wizard,archer,warrior)
+        show_health(wizard, archer, warrior)
+        target_selected = selection_target()
         while target_selected not in ["M","A","G"]:
             print("Choix non compris dans les possibilités")
             target_selected = selection_target()
