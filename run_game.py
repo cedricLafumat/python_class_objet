@@ -108,5 +108,6 @@ def main():
         attack = attack_management(choice_char, elfewizard, dwarfwizard, elfearcher, dwarfarcher, elfewarrior, dwarfwarrior)
         defence_management(target_selected, attack, elfewizard, dwarfwizard, elfearcher, dwarfarcher, elfewarrior, dwarfwarrior)
 
+
 if __name__ == '__main__':
     main()
