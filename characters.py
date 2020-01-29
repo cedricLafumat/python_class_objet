@@ -2,6 +2,8 @@ import random
 
 class Characters:
     max_health = 12
+    bow_bonus = 0
+    sword_bonus = 0
 
     def __init__(self,name):
         self.name = name
@@ -13,17 +15,17 @@ class Characters:
     def height(self):
         return self._height
 
-    @height.setter
-    def height(self, value):
-        self._height = value
+    # @height.setter
+    # def height(self, value):
+    #     self._height = value
 
     @property
     def weight(self):
         return self._weight
 
-    @weight.setter
-    def weight(self, value):
-        self._weight = value
+    # @weight.setter
+    # def weight(self, value):
+    #     self._weight = value
 
     def attack(self):
         dice = [
@@ -32,6 +34,12 @@ class Characters:
             ["bow",random.randint(1,self.bow_dice)]
         ]
         sort = sorted(dice, key=lambda dice: dice[1], reverse=True)
+        if sort[0][0] == "sword":
+            print("Choix '{}' bonus de race : {}".format(weapon, self.sword_bonus))
+            sort[0][1] += self.sword_bonus
+        if sort[0][0] == "bow":
+            print("Choix '{}' bonus de race : {}".format(weapon, self.bow_bonus))
+            sort[0][1] += self.bow_bonus
         return sort[0]
 
     def defend(self,weapon,attack_points):
@@ -121,3 +129,35 @@ class Warrior(Characters):
             points += bonus
             print("Arme choisi : '{}' / Bonus de '{}' points de dégats".format(weapon, bonus))
         return [weapon,points]
+
+
+class Dwarf:
+    sword_bonus = 2
+
+
+class Elfe:
+    bow_bonus = 2
+
+
+class ElfeWizard(Elfe, Wizard):
+    pass
+
+
+class DwarfWizard(Dwarf, Wizard):
+    pass
+
+
+class ElfeArcher(Elfe, Archer):
+    pass
+
+
+class DwarfArcher(Dwarf, Wizard):
+    pass
+
+
+class ElfeWarrior(Elfe, Warrior):
+    pass
+
+
+class DwarfWarrior(Dwarf, Warrior):
+    pass
